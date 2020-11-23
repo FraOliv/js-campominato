@@ -1,7 +1,7 @@
 var RandomNumbers = [];
 var UserNumbers = [];
 var punteggio = 0;
-var chance = 3;
+var chance = 1;
 var UserNUM;
 var FOUND = false;
 
@@ -55,7 +55,7 @@ function generaRandomNumbers(min, max) {
 function controlloRangeNumeri(min, max, number) {
   var result = false;
   if (number >= min && number <= max) {
-    result = true;
+    result = true;1
   }
   return result;
 }
