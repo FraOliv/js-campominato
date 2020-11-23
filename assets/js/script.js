@@ -1,7 +1,7 @@
 var RandomNumbers = [];
 var UserNumbers = [];
 var punteggio = 0;
-var chance = 16;
+var chance = 84;
 var UserNUM;
 var FOUND = false;
 
@@ -30,7 +30,7 @@ while (UserNumbers.length < chance && FOUND == false) {
     // se il numero dell'utente è presente nelle numberBomb hai perso
     if (presenteInArray(RandomNumbers, UserNUM) == true) {
       console.log("partita finita");
-      document.getElementById("messaggio").innerHTML = "Partita finita. Hai beccato il numero nascosto";
+      document.getElementById("messaggio").innerHTML = "Partita finita. Sei Esploso calpestando una mina, la prossima volta cammina con più attenzione!";
       FOUND = true;
     } else {
       punteggio++;
