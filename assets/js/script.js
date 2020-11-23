@@ -1,7 +1,7 @@
 var RandomNumbers = [];
 var UserNumbers = [];
 var punteggio = 0;
-var chance = 1;
+var chance = 16;
 var UserNUM;
 var FOUND = false;
 
