@@ -1,53 +1,96 @@
-var RandomNumbers = [];
-var UserNumbers = [];
+var numeriRandomPC = [];
+var numeriUtente = [];
 var punteggio = 0;
 var chance = 84;
-var UserNUM;
-var FOUND = false;
+var numeroUtente;
+var found = false;
+var Difficoltà;
+var numeroMax;
+var numeroMin;
 
-// .1 genero numeri random
-while (RandomNumbers.length < 16) {
-  // 2. inserisco solo se il numero non è già presente nell'array
-  var numeroCasuale = generaRandomNumbers(1, 100);
-  var cerca = presenteInArray(RandomNumbers, numeroCasuale);
+
+// chiedo Difficoltà difficoltà 
+Difficoltà = Number(prompt("Inserisci il Difficoltà di difficoltà: 0, 1 oppure 2 "));
+while (Difficoltà != 0 && Difficoltà != 1 && Difficoltà != 2){
+  Difficoltà = Number(prompt("Per favore inserisci il Difficoltà corretto di difficoltà: 0, 1 oppure 2"));
+}
+
+switch (Difficoltà) {
+  case 0:
+    numeroMin = 1;
+    numeroMax = 100;
+    chance = 84;
+    var titoloDomanda = "Inserisci un numero da 1 a 100";
+    break;
+
+  case 1:
+    numeroMin = 1;
+    numeroMax = 80;
+    chance = 64;
+    titoloDomanda = "Inserisci un numero da 1 a 80";
+    break;
+  case 2:
+    numeroMin = 1;
+    numeroMax = 50;
+    chance = 34;
+    titoloDomanda = "Inserisci un numero da 1 a 50";
+    break;
+
+    default:
+    case 0:
+    numeroMin = 1;
+    numeroMax = 100;
+    chance = 84;
+    var titoloDomanda = "Inserisci un numero da 1 a 100";
+}
+
+
+// genero numeri random
+while (numeriRandomPC.length < 16) {
+  //inserisco solo se il numero non è già presente nell'array
+  var numeroCasuale = generaNumeriRandomPC(1, numeroMax);
+  var cerca = presenteInArray(numeriRandomPC, numeroCasuale);
   if (cerca == false) {
-    RandomNumbers.push(numeroCasuale);
+    numeriRandomPC.push(numeroCasuale);
   }
 }
-console.log("numeri random " + RandomNumbers);
-document.getElementById("numeri-random").innerHTML = RandomNumbers;
 
-// 3. l'utente inserisce un numero per 84 tentativi
 
-while (UserNumbers.length < chance && FOUND == false) {
-  // 4. chiedo un numero all'utente con un ciclo per verificare che i numeri rispettino il range
 
-  UserNUM = Number(prompt("Inserisci un numero da 1 a 100"));
+
+while (numeriUtente.length < chance && found == false) {
+  // chiedo un numero all'utente con un ciclo per verificare che i numeri rispettino il range
+
+  numeroUtente = Number(prompt(titoloDomanda));
   richiediNumeroCorretto();
+  numUgualeInserito()
 
-  if (presenteInArray(UserNumbers, UserNUM) == false) {
-    UserNumbers.push(UserNUM);
-    // se il numero dell'utente è presente nelle numberBomb hai perso
-    if (presenteInArray(RandomNumbers, UserNUM) == true) {
+  if (presenteInArray(numeriUtente, numeroUtente) == false) {
+    numeriUtente.push(numeroUtente);
+    // se il numero dell'utente è presente
+    if (presenteInArray(numeriRandomPC, numeroUtente) == true) {
       console.log("partita finita");
-      document.getElementById("messaggio").innerHTML = "Partita finita. Sei Esploso calpestando una mina, la prossima volta cammina con più attenzione!";
-      FOUND = true;
+      document.getElementById("messaggio").innerHTML = "Partita finita. Hai beccato il numero nascosto";
+      found = true;
     } else {
       punteggio++;
     }
   }
 }
-console.log(" è stato FOUND? " + FOUND);
-console.log("punteggio" + punteggio);
-document.getElementById("punteggio").innerHTML = "Hai totalizzato un punteggio di " + punteggio;
 
-if (UserNumbers.length == chance) {
-  document.getElementById("messaggio").innerHTML = "Hai vinto la PARTITA senza lasciarci le penne!";
+
+
+console.log(" è stato found? " + found);
+console.log("punteggio" + punteggio);
+document.getElementById("punteggio").innerHTML = "Hai totalizzato un punteggio di " + punteggio + " i numeri dove erano posizionate le mine erano: " + numeriRandomPC;
+
+if (numeriUtente.length == chance) {
+  document.getElementById("messaggio").innerHTML = "Hai vinto la PARTITA senza lasciarci le penne!  " + " i numeri dove erano posizionate le mine erano: " + numeriRandomPC;;
 }
 
 // FUNZIONI DELLO SCRIPT
 // genero funzione numero random
-function generaRandomNumbers(min, max) {
+function generaNumeriRandomPC(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
@@ -55,7 +98,7 @@ function generaRandomNumbers(min, max) {
 function controlloRangeNumeri(min, max, number) {
   var result = false;
   if (number >= min && number <= max) {
-    result = true;1
+    result = true;
   }
   return result;
 }
@@ -68,15 +111,20 @@ function presenteInArray(array, element) {
     if (array[i] == element) {
       result = true;
     }
-    i++;
+    i++;1
   }
   return result;
 }
-
 // richiedi numero corretto
-function   richiediNumeroCorretto() {
-  while (controlloRangeNumeri(1, 100, UserNUM) == false) {
-    UserNUM = Number(prompt("Per favore inserisci un numero corretto: da 0  a 100" ));
-    console.log('Numero inserito: ' + UserNUM);
+function richiediNumeroCorretto() {
+  while (controlloRangeNumeri(numeroMin, numeroMax, numeroUtente) == false) {
+    numeroUtente = Number(prompt("Per favore inserisci un numero corretto: da 1  a " + numeroMax));
+    console.log('Numero inserito: ' + numeroUtente);
+  }
+}
+
+function numUgualeInserito() {
+  while (presenteInArray(numeriUtente, numeroUtente) == true) {
+numeroUtente = Number(prompt ("Avevi già inserito questo numero. Riprova con un numero diverso da " + numeroMin + " a " + numeroMax));
   }
 }
