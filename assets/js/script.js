@@ -10,9 +10,9 @@ var numeroMin;
 
 
 // chiedo Difficoltà difficoltà 
-Difficoltà = Number(prompt("Inserisci il Difficoltà di difficoltà: 0, 1 oppure 2 "));
+Difficoltà = Number(prompt("Inserisci il livello di difficoltà: 0, 1 oppure 2 "));
 while (Difficoltà != 0 && Difficoltà != 1 && Difficoltà != 2){
-  Difficoltà = Number(prompt("Per favore inserisci il Difficoltà corretto di difficoltà: 0, 1 oppure 2"));
+  Difficoltà = Number(prompt("Per favore inserisci il livello corretto di difficoltà: 0, 1 oppure 2"));
 }
 
 switch (Difficoltà) {
