@@ -10,7 +10,7 @@ var numeroMin;
 
 
 // chiedo Difficoltà difficoltà 
-Difficoltà = Number(prompt("Inserisci il livello di difficoltà: 0, 1 oppure 2 "));
+Difficoltà = Number(prompt("Benvenuto nel gioco del Campo Minato, Inserisci il livello di difficoltà: 0, 1 oppure 2 "));
 while (Difficoltà != 0 && Difficoltà != 1 && Difficoltà != 2){
   Difficoltà = Number(prompt("Per favore inserisci il livello corretto di difficoltà: 0, 1 oppure 2"));
 }
@@ -70,7 +70,7 @@ while (numeriUtente.length < chance && found == false) {
     // se il numero dell'utente è presente
     if (presenteInArray(numeriRandomPC, numeroUtente) == true) {
       console.log("partita finita");
-      document.getElementById("messaggio").innerHTML = "Partita finita. Hai beccato il numero nascosto";
+      document.getElementById("messaggio").innerHTML = "Partita finita. Hai calpestato una mina ed è esplosa!";
       found = true;
     } else {
       punteggio++;
@@ -85,7 +85,7 @@ console.log("punteggio" + punteggio);
 document.getElementById("punteggio").innerHTML = "Hai totalizzato un punteggio di " + punteggio + " i numeri dove erano posizionate le mine erano: " + numeriRandomPC;
 
 if (numeriUtente.length == chance) {
-  document.getElementById("messaggio").innerHTML = "Hai vinto la PARTITA senza lasciarci le penne!  " + " i numeri dove erano posizionate le mine erano: " + numeriRandomPC;;
+  document.getElementById("messaggio").innerHTML = "Hai vinto la PARTITA senza esplodere. " + " i numeri dove erano posizionate le mine erano: " + numeriRandomPC;;
 }
 
 // FUNZIONI DELLO SCRIPT
